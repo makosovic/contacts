@@ -156,6 +156,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entities\ContactInfoType.cs" />
     <Compile Include="Entities\Mapping\TagMap.cs" />
@@ -174,6 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactInfo\ContactInfoEditModel.cs" />
+    <Compile Include="Models\Contact\ContactEditModel.cs" />
+    <Compile Include="Models\Contact\ContactListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,8 +197,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bower_components\" />
-    <Folder Include="Controllers\Api\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
