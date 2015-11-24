@@ -18,6 +18,10 @@ namespace Contacts.Web.Models.ContactInfo
 
         [Required]
         public string Value { get; set; }
+
+        public bool IsNew => Id == 0;
+        public bool IsDeleted { get; set; }
+        public bool IsModified { get; set; }
     }
 }
 
