@@ -18,6 +18,7 @@ namespace Contacts.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DependencyConfig.Initialize(GlobalConfiguration.Configuration);
         }
     }
 }
