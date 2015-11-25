@@ -25,6 +25,11 @@ namespace Contacts.Web.Controllers.Api
         [HttpGet]
         public async Task<IEnumerable<ContactListModel>> Search(string phrase)
         {
+            if (string.IsNullOrEmpty(phrase))
+            {
+                return new List<ContactListModel>();
+            }
+
             return await _dbContext.Contacts
                 .Include(x => x.Tags)
                 .Where(x => x.FirstName.Contains(phrase) || x.LastName.Contains(phrase) || x.Tags.Any(y => y.Name.Contains(phrase)))
