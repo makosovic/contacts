@@ -78,6 +78,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ContactsControllerGetActionShould.cs" />
     <Compile Include="Mocks\MockContactsDbContext.cs" />
     <Compile Include="Mocks\MockDbSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

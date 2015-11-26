@@ -32,7 +32,7 @@ namespace Contacts.Web.Controllers.Api
 
             return await _dbContext.Contacts
                 .Include(x => x.Tags)
-                .Where(x => x.FirstName.Contains(phrase) || x.LastName.Contains(phrase) || x.Tags.Any(y => y.Name.Contains(phrase)))
+                .Where(x => x.FirstName.ToLower().Contains(phrase.ToLower()) || x.LastName.ToLower().Contains(phrase.ToLower()) || x.Tags.Any(y => y.Name.ToLower().Contains(phrase.ToLower())))
                 .Take(5)
                 .ProjectTo<ContactListModel>()
                 .ToListAsync();
@@ -52,7 +52,7 @@ namespace Contacts.Web.Controllers.Api
         public async Task<ContactListModel> Get(int id)
         {
             var contact = await _dbContext.Contacts
-                .FindAsync(id);
+                .FirstOrDefaultAsync(x => x.Id == id);
             return Mapper.Map<ContactListModel>(contact);
         }
 

@@ -114,6 +114,19 @@ namespace Contacts.Web.Tests.Mocks
                 }
             }.AsQueryable();
 
+            foreach (var contact in contacts)
+            {
+                foreach (var contactInfo in contactInfos.Where(x => x.ContactId == contact.Id))
+                {
+                    contact.ContactInfos.Add(contactInfo);
+                }
+
+                foreach (var tag in tags.Where(x => x.ContactId == contact.Id))
+                {
+                    contact.Tags.Add(tag);
+                }
+            }
+
             var mockContactsDbSet = new MockDbSet<Contact>(contacts);
             var mockContactInfosDbSet = new MockDbSet<ContactInfo>(contactInfos);
             var mockTagsDbSet = new MockDbSet<Tag>(tags);

@@ -12,7 +12,7 @@ using Moq;
 namespace Contacts.Web.Tests
 {
     [TestClass]
-    public class ContactsControllerSearchActionShould
+    public class ContactsControllerGetActionShould
     {
         private Mock<IContactsDbContext> _mockDbContext;
 
@@ -29,46 +29,34 @@ namespace Contacts.Web.Tests
         }
 
         [TestMethod]
-        public void ReturnNoResultsIfSearchPhraseIsEmpty()
-        {
-            var phrase = "";
-            var contactsController = new ContactsController(_mockDbContext.Object);
-
-            var result = contactsController.Search(phrase).Result;
-
-            Assert.AreEqual(0, result.Count());
-        }
-
-        [TestMethod]
-        public void ReturnNoResultsIfSearchPhraseIsNull()
+        public void ReturnOneResultIfParameterTopWasOne()
         {
             var contactsController = new ContactsController(_mockDbContext.Object);
 
-            var result = contactsController.Search(null).Result;
-
-            Assert.AreEqual(0, result.Count());
-        }
-
-        [TestMethod]
-        public void ReturnOneResultIfSearchPhraseIsVader()
-        {
-            var phrase = "vader";
-            var contactsController = new ContactsController(_mockDbContext.Object);
-
-            var result = contactsController.Search(phrase).Result;
+            var result = contactsController.Get(top: 1).Result;
 
             Assert.AreEqual(1, result.Count());
         }
 
         [TestMethod]
-        public void ReturnOneResultIfSearchPhraseIsPrincess()
+        public void SkipFirstResultIfParamterSkipWasOne()
         {
-            var phrase = "Princess";
             var contactsController = new ContactsController(_mockDbContext.Object);
 
-            var result = contactsController.Search(phrase).Result;
+            var result = contactsController.Get(skip: 1).Result;
 
-            Assert.AreEqual(1, result.Count());
+            Assert.AreEqual(2, result.Select(x => x.Id).FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void ReturnOneResultWithRequestedIdIfParameterIdWasGiven()
+        {
+            var id = 1;
+            var contactsController = new ContactsController(_mockDbContext.Object);
+
+            var result = contactsController.Get(id).Result;
+
+            Assert.AreEqual(1, result.Id);
         }
     }
 }
