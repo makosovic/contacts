@@ -15,11 +15,14 @@ namespace Contacts.Web
                 "~/bower_components/angular-aria/angular-aria.js",
                 "~/bower_components/angular-material/angular-material.js",
                 "~/bower_components/angular-messages/angular-messages.js",
-                "~/bower_components/ng-breadcrumbs/ng-breadcrumbs.js"));
+                "~/bower_components/ng-breadcrumbs/ng-breadcrumbs.js",
+                "~/bower_components/moment/moment.js"
+                ));
 
             bundles.Add(new StyleBundle("~/bundles/styles").Include(
                 "~/bower_components/angular-material/angular-material.css",
-                "~/Content/site.css"));
+                "~/Content/site.css"
+                ));
         }
     }
 }
