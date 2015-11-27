@@ -58,5 +58,17 @@ namespace Contacts.Web.Tests
 
             Assert.AreEqual(1, result.Id);
         }
+
+        [TestMethod]
+        public void OrderResultsAlphabetically()
+        {
+            var contactsController = new ContactsController(_mockDbContext.Object);
+
+            var result = contactsController.Get().Result.ToList();
+
+            Assert.AreEqual("Darth", result.First().FirstName);
+            Assert.AreEqual("Leia", result.Skip(1).First().FirstName);
+            Assert.AreEqual("Luke", result.Skip(2).First().FirstName);
+        }
     }
 }

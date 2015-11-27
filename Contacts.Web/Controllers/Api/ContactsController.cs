@@ -33,6 +33,8 @@ namespace Contacts.Web.Controllers.Api
             return await _dbContext.Contacts
                 .Include(x => x.Tags)
                 .Where(x => x.FirstName.ToLower().Contains(phrase.ToLower()) || x.LastName.ToLower().Contains(phrase.ToLower()) || x.Tags.Any(y => y.Name.ToLower().Contains(phrase.ToLower())))
+                .OrderBy(x => x.FirstName)
+                .ThenBy(x => x.LastName)
                 .Take(5)
                 .ProjectTo<ContactListModel>()
                 .ToListAsync();
@@ -42,6 +44,8 @@ namespace Contacts.Web.Controllers.Api
         public async Task<IEnumerable<ContactListModel>> Get(int skip = 0, int top = 10)
         {
             return await _dbContext.Contacts
+                .OrderBy(x => x.FirstName)
+                .ThenBy(x => x.LastName)
                 .Skip(skip)
                 .Take(top)
                 .ProjectTo<ContactListModel>()
