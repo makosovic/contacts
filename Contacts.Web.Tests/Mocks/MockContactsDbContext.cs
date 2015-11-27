@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Contacts.Web.Entities;
 using Moq;
@@ -7,6 +9,14 @@ namespace Contacts.Web.Tests.Mocks
 {
     internal sealed class MockContactsDbContext : Mock<IContactsDbContext>
     {
+        private readonly MockDbSet<Contact> _mockContactsDbSet;
+        private readonly MockDbSet<ContactInfo> _mockContactInfosDbSet;
+        private readonly MockDbSet<Tag> _mockTagsDbSet;
+
+        public MockDbSet<Contact> MockContactsDbSet { get { return _mockContactsDbSet; } }
+        public MockDbSet<ContactInfo> MockContactInfosDbSet { get { return _mockContactInfosDbSet; } }
+        public MockDbSet<Tag> MockTagsDbSet { get { return _mockTagsDbSet; } }
+
         public MockContactsDbContext()
         {
             var contactInfos = new List<ContactInfo>
@@ -127,13 +137,13 @@ namespace Contacts.Web.Tests.Mocks
                 }
             }
 
-            var mockContactsDbSet = new MockDbSet<Contact>(contacts);
-            var mockContactInfosDbSet = new MockDbSet<ContactInfo>(contactInfos);
-            var mockTagsDbSet = new MockDbSet<Tag>(tags);
+            _mockContactsDbSet = new MockDbSet<Contact>(contacts);
+            _mockContactInfosDbSet = new MockDbSet<ContactInfo>(contactInfos);
+            _mockTagsDbSet = new MockDbSet<Tag>(tags);
 
-            Setup(x => x.Contacts).Returns(mockContactsDbSet.Object);
-            Setup(x => x.ContactInfos).Returns(mockContactInfosDbSet.Object);
-            Setup(x => x.Tags).Returns(mockTagsDbSet.Object);
+            Setup(x => x.Contacts).Returns(_mockContactsDbSet.Object);
+            Setup(x => x.ContactInfos).Returns(_mockContactInfosDbSet.Object);
+            Setup(x => x.Tags).Returns(_mockTagsDbSet.Object);
         }
     }
 }

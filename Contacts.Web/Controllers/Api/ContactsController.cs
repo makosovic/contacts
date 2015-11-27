@@ -81,7 +81,6 @@ namespace Contacts.Web.Controllers.Api
             await _dbContext.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = contact.Id }, Mapper.Map<ContactEditModel>(contact));
-
         }
 
         [Route("contacts/{id}")]
@@ -97,7 +96,7 @@ namespace Contacts.Web.Controllers.Api
                 return BadRequest();
             }
 
-            Contact contact = await _dbContext.Contacts.FindAsync(model.Id);
+            Contact contact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == model.Id);
 
             if (contact == null)
             {
@@ -116,7 +115,7 @@ namespace Contacts.Web.Controllers.Api
         [Route("contacts/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            Contact contact = await _dbContext.Contacts.FindAsync(id);
+            Contact contact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == id);
             if (contact == null)
             {
                 return NotFound();

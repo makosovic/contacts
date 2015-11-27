@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
+﻿using System.Linq;
 using Contacts.Web.Controllers.Api;
 using Contacts.Web.Entities;
-using Contacts.Web.Tests.Async;
 using Contacts.Web.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

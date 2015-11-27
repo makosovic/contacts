@@ -17,13 +17,13 @@ namespace Contacts.Web.Models
                 LastName = model.LastName,
                 BirthDate = model.BirthDate,
                 Favorite = model.Favorite,
-                ContactInfos = model.ContactInfos.Select(x => new Entities.ContactInfo
+                ContactInfos = model.ContactInfos == null ? new List<Entities.ContactInfo>() : model.ContactInfos.Select(x => new Entities.ContactInfo
                 {
                     Name = x.Name,
                     Type = (ContactInfoType)Enum.Parse(typeof(ContactInfoType), x.Type, true),
                     Value = x.Value
                 }).ToList(),
-                Tags = model.Tags.Select(x => new Entities.Tag
+                Tags = model.Tags == null ? new List<Entities.Tag>() : model.Tags.Select(x => new Entities.Tag
                 {
                     Name = x
                 }).ToList()
@@ -39,32 +39,35 @@ namespace Contacts.Web.Models
 
             #region update contact infos
 
-            List<Entities.ContactInfo> contactInfos = entity.ContactInfos.ToList();
-            if (contactInfos.Count > 0)
+            if (model.ContactInfos != null)
             {
-                contactInfos.RemoveAll(x => model.ContactInfos.All(y => y.IsDeleted));
-                entity.ContactInfos = contactInfos;
-            }
-
-            foreach (var contactInfo in model.ContactInfos.Where(x => x.IsDeleted))
-            {
-                if (contactInfo.IsNew)
+                List<Entities.ContactInfo> contactInfos = entity.ContactInfos.ToList();
+                if (contactInfos.Count > 0)
                 {
-                    entity.ContactInfos.Add(new Entities.ContactInfo
-                    {
-                        Name = contactInfo.Name,
-                        Type = (ContactInfoType) Enum.Parse(typeof (ContactInfoType), contactInfo.Type, true),
-                        Value = contactInfo.Value
-                    });
+                    contactInfos.RemoveAll(x => model.ContactInfos.All(y => y.IsDeleted));
+                    entity.ContactInfos = contactInfos;
                 }
-                else if (contactInfo.IsModified)
+
+                foreach (var contactInfo in model.ContactInfos.Where(x => x.IsDeleted))
                 {
-                    var oldContactInfo = entity.ContactInfos.FirstOrDefault(x => x.Id == contactInfo.Id);
-                    if (oldContactInfo != null)
+                    if (contactInfo.IsNew)
                     {
-                        oldContactInfo.Name = contactInfo.Name;
-                        oldContactInfo.Type = (ContactInfoType)Enum.Parse(typeof(ContactInfoType), contactInfo.Type, true);
-                        oldContactInfo.Value = contactInfo.Value;
+                        entity.ContactInfos.Add(new Entities.ContactInfo
+                        {
+                            Name = contactInfo.Name,
+                            Type = (ContactInfoType)Enum.Parse(typeof(ContactInfoType), contactInfo.Type, true),
+                            Value = contactInfo.Value
+                        });
+                    }
+                    else if (contactInfo.IsModified)
+                    {
+                        var oldContactInfo = entity.ContactInfos.FirstOrDefault(x => x.Id == contactInfo.Id);
+                        if (oldContactInfo != null)
+                        {
+                            oldContactInfo.Name = contactInfo.Name;
+                            oldContactInfo.Type = (ContactInfoType)Enum.Parse(typeof(ContactInfoType), contactInfo.Type, true);
+                            oldContactInfo.Value = contactInfo.Value;
+                        }
                     }
                 }
             }
@@ -73,16 +76,19 @@ namespace Contacts.Web.Models
 
             #region update tags
 
-            List<Entities.Tag> tags = entity.Tags.ToList();
-            if (tags.Count > 0)
+            if (model.Tags != null)
             {
-                tags.RemoveAll(x => model.Tags.All(y => y != x.Name));
-                entity.Tags = tags;
-            }
+                List<Entities.Tag> tags = entity.Tags.ToList();
+                if (tags.Count > 0)
+                {
+                    tags.RemoveAll(x => model.Tags.All(y => y != x.Name));
+                    entity.Tags = tags;
+                }
 
-            foreach (var tag in model.Tags.Where(x => entity.Tags.All(y => y.Name != x)))
-            {
-                entity.Tags.Add(new Tag { Name = tag });
+                foreach (var tag in model.Tags.Where(x => entity.Tags.All(y => y.Name != x)))
+                {
+                    entity.Tags.Add(new Tag { Name = tag });
+                }
             }
 
             #endregion
