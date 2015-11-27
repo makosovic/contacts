@@ -53,11 +53,17 @@ namespace Contacts.Web.Controllers.Api
         }
 
         [Route("contacts/{id}")]
-        public async Task<ContactListModel> Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             var contact = await _dbContext.Contacts
                 .FirstOrDefaultAsync(x => x.Id == id);
-            return Mapper.Map<ContactListModel>(contact);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Mapper.Map<ContactListModel>(contact));
         }
 
         [Route("contacts")]
