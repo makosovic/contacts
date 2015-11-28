@@ -34,25 +34,6 @@
             $location.path('/contacts/new');
         }
 
-        $scope.delete = function (contact, e) {
-            var confirm = $mdDialog.confirm()
-                .parent(angular.element(document.body))
-                .title('Delete contact')
-                .content('Are you sure you want to delete this contact?')
-                .ariaLabel('Delete contact')
-                .ok('Delete')
-                .cancel('Cancel')
-                .targetEvent(e);
-            $mdDialog.show(confirm).then(function () {
-                contactService.delete(contact.id).then(function (data, errors) {
-                    showSimpleToast('Successfully deleted contact.');
-                    getContacts();
-                }, function (errors) {
-                    showSimpleToast('There was an error, couldn\'t delete contact.');
-                });
-            });
-        }
-
         var showSimpleToast = function (message) {
             $mdToast.show(
               $mdToast.simple()

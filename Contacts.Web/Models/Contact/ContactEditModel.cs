@@ -11,10 +11,15 @@ namespace Contacts.Web.Models.Contact
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(128)]
         public string FirstName { get; set; }
 
         [Required]
+        [MaxLength(128)]
         public string LastName { get; set; }
+
+        [MaxLength(256)]
+        public string Address { get; set; }
 
         public DateTime? BirthDate { get; set; }
 

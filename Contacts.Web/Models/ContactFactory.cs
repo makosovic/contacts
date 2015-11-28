@@ -15,6 +15,7 @@ namespace Contacts.Web.Models
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                Address = model.Address,
                 BirthDate = model.BirthDate,
                 Favorite = model.Favorite,
                 ContactInfos = model.ContactInfos == null ? new List<Entities.ContactInfo>() : model.ContactInfos.Select(x => new Entities.ContactInfo
@@ -34,6 +35,7 @@ namespace Contacts.Web.Models
         {
             entity.FirstName = model.FirstName;
             entity.LastName = model.LastName;
+            entity.Address = model.Address;
             entity.BirthDate = model.BirthDate;
             entity.Favorite = model.Favorite;
 

@@ -11,11 +11,21 @@
     }
 
 
-    .autocomplete-custom-template .item-title md-icon {
-        height: 18px;
-        width: 18px;
-    }
+.autocomplete-custom-template .item-title md-icon {
+    height: 18px;
+    width: 18px;
+}
 
-.search {
-    width: 80%;
+.md-pane-open .md-datepicker-calendar {
+    background: white;
+}
+
+md-card {
+    padding: 10px 20px;
+}
+
+.fab-action {
+    bottom: 20px;
+    right: 20px;
+    position: absolute;
 }

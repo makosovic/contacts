@@ -168,6 +168,10 @@
     <Compile Include="Entities\Migrations\201511241155059_InitialMigration.Designer.cs">
       <DependentUpon>201511241155059_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Migrations\201511281330418_AddAddressToContact.cs" />
+    <Compile Include="Entities\Migrations\201511281330418_AddAddressToContact.Designer.cs">
+      <DependentUpon>201511281330418_AddAddressToContact.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Migrations\Configuration.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Entities\ContactInfo.cs" />
@@ -184,7 +188,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="images\icons\ic_contacts_black_24px.svg" />
     <Content Include="images\icons\ic_delete_black_24px.svg" />
-    <Content Include="images\icons\ic_person_add_black_24px.svg" />
+    <Content Include="images\icons\ic_person_add_white_24px.svg" />
     <Content Include="images\icons\ic_star_yellow_24px.svg" />
     <Content Include="images\icons\ic_star_border_yellow_24px.svg" />
     <Content Include="Scripts\contacts\contactService.js" />
@@ -233,6 +237,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Entities\Migrations\201511241155059_InitialMigration.resx">
       <DependentUpon>201511241155059_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\Migrations\201511281330418_AddAddressToContact.resx">
+      <DependentUpon>201511281330418_AddAddressToContact.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,7 +9,9 @@ namespace Contacts.Web
     {
         public static void RegisterMappings()
         {
-            AutoMapper.Mapper.CreateMap<Contact, ContactListModel>();
+            AutoMapper.Mapper.CreateMap<Contact, ContactListModel>()
+                .ForMember(dest => dest.FullName,
+                           opts => opts.MapFrom(src => src.FirstName + " " + src.LastName));
 
             AutoMapper.Mapper.CreateMap<Contact, ContactEditModel>()
                 .ForMember(dest => dest.Tags,

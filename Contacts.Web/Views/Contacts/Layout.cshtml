@@ -13,13 +13,16 @@
         <div flex layout="column" tabindex="-1" role="main" class="md-whiteframe-z2">
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <a href="/#/" aria-label="Home" style="width: 160px; color: white; text-align: center">Contacts</a>
+                    <a href="/#/" aria-label="Home" style="color: white; text-align: center" flex="10">Contacts</a>
 
-                    <ng-include src="'Scripts/contacts/search.html'" style="width: 100%"></ng-include>
+                    <ng-include src="'Scripts/contacts/search.html'" flex="70"></ng-include>
                 </div>
             </md-toolbar>
 
             <ng-view></ng-view>
+            <md-button class="md-fab fab-action" aria-label="Add contact" href="/#/contacts/new">
+                <md-icon md-svg-src="images/icons/ic_person_add_white_24px.svg"></md-icon>
+            </md-button>
         </div>
 
     </div>

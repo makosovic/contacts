@@ -1,46 +1,62 @@
 ﻿
-<Form name="contactForm" role="Form" novalidate>
-    <div layout="column">
-        <md-content md-scroll-y flex layout-padding class="md-default-theme">
-            <div layout layout-sm="column">
-                <md-input-container flex>
-                    <label for="firstname">First Name</label>
-                    <input ng-model="contact.firstName" name="firstname" id="firstname" required="">
-                    <div ng-messages="contactForm.firstname.$error" ng-if="contactForm.firstname.$dirty && contactForm.firstname.$touched">
-                        <div ng-message="required">First name is required.</div>
-                    </div>
-                </md-input-container>
-            </div>
+<md-content class="md-padding" layout="row" layout-wrap>
+    <div flex="10"></div>
+    <div flex="70" layout="column">
+        <md-card>
 
-            <div layout layout-sm="column">
-                <md-input-container flex>
-                    <label for="lastname">Last Name</label>
-                    <input ng-model="contact.lastName" name="lastname" id="lastname" required="">
-                    <div ng-messages="contactForm.lastname.$error" ng-if="contactForm.lastname.$dirty && contactForm.lastname.$touched">
-                        <div ng-message="required">Last name is required.</div>
-                    </div>
-                </md-input-container>
-            </div>
+            <Form name="contactForm" role="Form" novalidate>
+                <div layout="column">
+                    <md-content md-scroll-y flex layout-padding class="md-default-theme">
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label for="firstname">First Name</label>
+                                <input ng-model="contact.firstName" name="firstname" id="firstname" required="" maxlength="128">
+                                <div ng-messages="contactForm.firstname.$error" ng-if="contactForm.firstname.$dirty && contactForm.firstname.$touched">
+                                    <div ng-message="required">First name is required.</div>
+                                    <div ng-message="maxlength">First name can't be longer than 128 characters.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
 
-            <div layout layout-sm="column">
-                <md-input-container flex>
-                    <label for="birthdate">Birthday</label>
-                    <md-datepicker ng-model="contact.birthDate" md-placeholder="Birthday" name="birthdate" id="birthdate"></md-datepicker>
-                </md-input-container>
-            </div>
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label for="lastname">Last Name</label>
+                                <input ng-model="contact.lastName" name="lastname" id="lastname" required="" maxlength="128">
+                                <div ng-messages="contactForm.lastname.$error" ng-if="contactForm.lastname.$dirty && contactForm.lastname.$touched">
+                                    <div ng-message="required">Last name is required.</div>
+                                    <div ng-message="maxlength">Last name can't be longer than 128 characters.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
 
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label for="address">Address</label>
+                                <input ng-model="contact.address" name="address" id="address" required="" maxlength="256">
+                                <div ng-messages="contactForm.address.$error" ng-if="contactForm.address.$dirty && contactForm.address.$touched">
+                                    <div ng-message="required">Address is required.</div>
+                                    <div ng-message="maxlength">Address can't be longer than 256 characters.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
 
-            <div layout layout-sm="column">
-                <md-checkbox ng-model="contact.favorite" aria-label="Favorite">
-                    Favorite 
-                </md-checkbox>
-            </div>
+                        <div layout layout-sm="row">
+                            <md-checkbox ng-model="contact.favorite" aria-label="Favorite">
+                                Favorite
+                            </md-checkbox>
 
-            <section layout="row" layout-sm="column" layout-align="center center">
-                <span flex></span>
-                <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
-                <md-button class="md-raised md-primary" ng-click="save()">Save</md-button>
-            </section>
-        </md-content>
+                            <md-datepicker ng-model="contact.birthDate" md-placeholder="Birthday" name="birthdate" id="birthdate"></md-datepicker>
+                        </div>
+
+                        <section layout="row" layout-sm="column" layout-align="center center">
+                            <span flex></span>
+                            <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+                            <md-button class="md-raised md-warn" ng-click="delete()" ng-if="contact.id">Delete</md-button>
+                            <md-button class="md-raised md-primary" ng-click="save()">Save</md-button>
+                        </section>
+                    </md-content>
+                </div>
+            </Form>
+        </md-card>
     </div>
-</Form>
+</md-content>

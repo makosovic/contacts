@@ -1,4 +1,4 @@
-﻿<div ng-controller="searchController as ctrl" layout="column" class="search" ng-cloak>
+﻿<div ng-controller="searchController as ctrl" layout="column" ng-cloak>
     <form ng-submit="$event.preventDefault()">
 
         <md-autocomplete md-selected-item="ctrl.selectedItem"
@@ -7,7 +7,7 @@
                          md-selected-item-change="ctrl.selectedItemChange(item)"
                          md-items="item in ctrl.querySearch(ctrl.searchText)"
                          md-item-text="item.fullName"
-                         md-min-length="2"
+                         md-min-length="1"
                          placeholder="Search contact list"
                          md-menu-class="autocomplete-custom-template">
             <md-item-template>
@@ -27,3 +27,5 @@
 
     </form>
 </div>
+
+
