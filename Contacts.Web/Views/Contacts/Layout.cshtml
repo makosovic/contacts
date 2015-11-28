@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    @Styles.Render("~/bundles/styles")
+</head>
+<body ng-app="capp">
+
+    <div layout="row" style="height: 100%">
+        <div flex layout="column" tabindex="-1" role="main" class="md-whiteframe-z2">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <a href="/#/" aria-label="Home" style="width: 160px; color: white; text-align: center">Contacts</a>
+
+                    <ng-include src="'Scripts/contacts/search.html'" style="width: 100%"></ng-include>
+                </div>
+            </md-toolbar>
+
+            <ng-view></ng-view>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/scripts/lib")
+    @Scripts.Render("~/bundles/scripts")
+</body>
+</html>

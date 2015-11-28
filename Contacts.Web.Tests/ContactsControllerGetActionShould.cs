@@ -27,23 +27,13 @@ namespace Contacts.Web.Tests
         }
 
         [TestMethod]
-        public void ReturnOneResultIfParameterTopWasOne()
+        public void ReturnThreeResultsIfNoParameterWasProvided()
         {
             var contactsController = new ContactsController(_mockDbContext.Object);
 
-            var result = contactsController.Get(top: 1).Result;
+            var result = contactsController.Get().Result;
 
-            Assert.AreEqual(1, result.Count());
-        }
-
-        [TestMethod]
-        public void SkipFirstResultIfParamterSkipWasOne()
-        {
-            var contactsController = new ContactsController(_mockDbContext.Object);
-
-            var result = contactsController.Get(skip: 1).Result;
-
-            Assert.AreEqual(2, result.Select(x => x.Id).FirstOrDefault());
+            Assert.AreEqual(3, result.Count());
         }
 
         [TestMethod]

@@ -19,6 +19,7 @@ namespace Contacts.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DependencyConfig.Initialize(GlobalConfiguration.Configuration);
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }

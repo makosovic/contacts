@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace Contacts.Web.Controllers
 {
-    public class HomeController : Controller
+    public class ContactsController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Layout()
         {
             return View();
         }

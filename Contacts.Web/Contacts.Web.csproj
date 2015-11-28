@@ -158,8 +158,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\ContactsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Entities\ContactInfoType.cs" />
+    <Compile Include="Entities\Context\ContactsDbInitializer.cs" />
     <Compile Include="Entities\Mapping\TagMap.cs" />
     <Compile Include="Entities\Mapping\ContactInfoMap.cs" />
     <Compile Include="Entities\Mapping\ContactMap.cs" />
@@ -181,11 +182,26 @@
     <Compile Include="Models\Contact\ContactEditModel.cs" />
     <Compile Include="Models\Contact\ContactListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="images\icons\ic_contacts_black_24px.svg" />
+    <Content Include="images\icons\ic_delete_black_24px.svg" />
+    <Content Include="images\icons\ic_person_add_black_24px.svg" />
+    <Content Include="images\icons\ic_star_yellow_24px.svg" />
+    <Content Include="images\icons\ic_star_border_yellow_24px.svg" />
+    <Content Include="Scripts\contacts\contactService.js" />
+    <Content Include="Scripts\contacts\search.html" />
+    <Content Include="Scripts\contacts\searchController.js" />
+    <Content Include="Scripts\contacts\form\formController.js" />
+    <Content Include="Scripts\contacts\list\listController.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\contacts\app.js" />
+    <Content Include="Scripts\contacts\form\form.html" />
+    <Content Include="Scripts\contacts\list\list.html" />
+    <Content Include="Scripts\contacts\themeConfig.js" />
+    <Content Include="Scripts\contacts\routeConfig.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -204,7 +220,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Contacts\Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower.json" />

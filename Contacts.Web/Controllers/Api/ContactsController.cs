@@ -21,7 +21,7 @@ namespace Contacts.Web.Controllers.Api
             _dbContext = dbContext;
         }
 
-        [Route("contacts")]
+        [Route("api/contacts/search")]
         [HttpGet]
         public async Task<IEnumerable<ContactListModel>> Search(string phrase)
         {
@@ -40,19 +40,17 @@ namespace Contacts.Web.Controllers.Api
                 .ToListAsync();
         }
 
-        [Route("contacts")]
-        public async Task<IEnumerable<ContactListModel>> Get(int skip = 0, int top = 10)
+        [Route("api/contacts")]
+        public async Task<IEnumerable<ContactListModel>> Get()
         {
             return await _dbContext.Contacts
                 .OrderBy(x => x.FirstName)
                 .ThenBy(x => x.LastName)
-                .Skip(skip)
-                .Take(top)
                 .ProjectTo<ContactListModel>()
                 .ToListAsync();
         }
 
-        [Route("contacts/{id}")]
+        [Route("api/contacts/{id}")]
         public async Task<IHttpActionResult> Get(int id)
         {
             var contact = await _dbContext.Contacts
@@ -66,7 +64,7 @@ namespace Contacts.Web.Controllers.Api
             return Ok(Mapper.Map<ContactListModel>(contact));
         }
 
-        [Route("contacts")]
+        [Route("api/contacts")]
         public async Task<IHttpActionResult> Post([FromBody]ContactEditModel model)
         {
             if (!ModelState.IsValid)
@@ -83,7 +81,7 @@ namespace Contacts.Web.Controllers.Api
             return CreatedAtRoute("DefaultApi", new { id = contact.Id }, Mapper.Map<ContactEditModel>(contact));
         }
 
-        [Route("contacts/{id}")]
+        [Route("api/contacts/{id}")]
         public async Task<IHttpActionResult> Put(int id, [FromBody]ContactEditModel model)
         {
             if (!ModelState.IsValid)
@@ -112,7 +110,7 @@ namespace Contacts.Web.Controllers.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Route("contacts/{id}")]
+        [Route("api/contacts/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             Contact contact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == id);
