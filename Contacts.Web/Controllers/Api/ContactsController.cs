@@ -54,14 +54,14 @@ namespace Contacts.Web.Controllers.Api
         public async Task<IHttpActionResult> Get(int id)
         {
             var contact = await _dbContext.Contacts
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FindAsync(id);
 
             if (contact == null)
             {
                 return NotFound();
             }
 
-            return Ok(Mapper.Map<ContactListModel>(contact));
+            return Ok(Mapper.Map<ContactEditModel>(contact));
         }
 
         [Route("api/contacts")]
@@ -94,7 +94,7 @@ namespace Contacts.Web.Controllers.Api
                 return BadRequest();
             }
 
-            Contact contact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == model.Id);
+            Contact contact = await _dbContext.Contacts.FindAsync(model.Id);
 
             if (contact == null)
             {
@@ -113,7 +113,7 @@ namespace Contacts.Web.Controllers.Api
         [Route("api/contacts/{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            Contact contact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == id);
+            Contact contact = await _dbContext.Contacts.FindAsync(id);
             if (contact == null)
             {
                 return NotFound();

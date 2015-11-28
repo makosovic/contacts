@@ -9,6 +9,8 @@
          ]);
 
     function contactFormController(contactService, $scope, $location, $mdToast, $mdDialog, $window, $routeParams) {
+        $scope.contact = {};
+
         if ($routeParams.id != "new") {
             contactService.getById($routeParams.id).then(function (data, errors) {
                 $scope.contact = data;

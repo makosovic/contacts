@@ -8,6 +8,10 @@
                 <div layout="column">
                     <md-content md-scroll-y flex layout-padding class="md-default-theme">
                         <div layout layout-sm="column">
+                            <md-chips ng-model="contact.tags" readonly="ctrl.readonly"></md-chips>
+                        </div>
+
+                        <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label for="firstname">First Name</label>
                                 <input ng-model="contact.firstName" name="firstname" id="firstname" required="" maxlength="128">
@@ -40,7 +44,7 @@
                             </md-input-container>
                         </div>
 
-                        <div layout layout-sm="row">
+                        <div layout="row" layout-sm="column">
                             <md-checkbox ng-model="contact.favorite" aria-label="Favorite">
                                 Favorite
                             </md-checkbox>

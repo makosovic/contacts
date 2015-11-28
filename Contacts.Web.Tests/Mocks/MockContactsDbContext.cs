@@ -137,9 +137,9 @@ namespace Contacts.Web.Tests.Mocks
                 }
             }
 
-            _mockContactsDbSet = new MockDbSet<Contact>(contacts);
-            _mockContactInfosDbSet = new MockDbSet<ContactInfo>(contactInfos);
-            _mockTagsDbSet = new MockDbSet<Tag>(tags);
+            _mockContactsDbSet = new MockDbSet<Contact>(contacts, contacts.Select(x => x.Id));
+            _mockContactInfosDbSet = new MockDbSet<ContactInfo>(contactInfos, contactInfos.Select(x => x.Id));
+            _mockTagsDbSet = new MockDbSet<Tag>(tags, tags.Select(x => x.Id));
 
             Setup(x => x.Contacts).Returns(_mockContactsDbSet.Object);
             Setup(x => x.ContactInfos).Returns(_mockContactInfosDbSet.Object);
