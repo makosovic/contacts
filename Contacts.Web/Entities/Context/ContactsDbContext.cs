@@ -8,7 +8,6 @@ namespace Contacts.Web.Entities.Context
         public ContactsDbContext()
             : base("Name=ContactsDbConnectionString")
         {
-            Database.SetInitializer<ContactsDbContext>(new ContactsDbInitializer());
         }
 
         public DbSet<Contact> Contacts { get; set; }

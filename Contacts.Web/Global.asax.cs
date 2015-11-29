@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Contacts.Web.Entities.Context;
 
 namespace Contacts.Web
 {
@@ -20,6 +22,7 @@ namespace Contacts.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DependencyConfig.Initialize(GlobalConfiguration.Configuration);
             AutoMapperConfig.RegisterMappings();
+            Database.SetInitializer(new ContactsDbInitializer());
         }
     }
 }
