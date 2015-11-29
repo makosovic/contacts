@@ -14,3 +14,20 @@ Naglasak neka bude na cistom, razumljivom i elegantnom dizajnu koda.
 Na front-endu koristi AngularJS a na back-endu koristi ASP.NET MVC tehnologiju. Podaci neka se spremaju u neki perzistentni storage, sam izaberi koji zelis koristiti.
  
 Za slucaj da nije jasno is samog zadatka, aplikacija je zamisljena za jednog korisnika, nije potrebno implementirati nikakav sustav za log-in, registraciju i slicno.
+
+Rješenje
+----------
+
+Korišten je bower tako da je u Contacts.Web projektu potrebno pozvati naredbu 
+```
+bower install
+```
+
+Perzistentni storage očekuje SqlServer named instance, te da korisnik ima prava u protivnom je potrebno mjenjati sljedeći connection string
+```xml
+  <connectionStrings>
+    <add name="ContactsDbConnectionString" connectionString="Data Source=.;Initial Catalog=ContactsDb;Integrated Security=True;MultipleActiveResultSets=True" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+```
+
+Aplikacija se također može isprobati [ovdje](http://contactshr.azurewebsites.net)
