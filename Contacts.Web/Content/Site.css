@@ -27,7 +27,7 @@ md-card {
 .fab-action {
     bottom: 20px;
     right: 20px;
-    position: absolute;
+    position: fixed;
 }
 
 .logo {
