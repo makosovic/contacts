@@ -9,23 +9,33 @@
 </head>
 <body ng-app="capp">
 
-    <div layout="row" style="height: 100%">
-        <div flex layout="column" tabindex="-1" role="main" class="md-whiteframe-z2">
+        <div flex layout="column" role="main">
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <a href="/#/" aria-label="Home" style="color: white; text-align: center" flex="10">Contacts</a>
+                    <a href="/#/" aria-label="Home" class="logo" flex="20" hide-sm>Contacts</a>
 
-                    <ng-include src="'Scripts/contacts/search.html'" flex="70"></ng-include>
+                    <ng-include src="'Scripts/contacts/search.html'" flex="80" flex-sm="100"></ng-include>
                 </div>
             </md-toolbar>
 
-            <ng-view></ng-view>
+
+
+            <md-content class="md-padding" layout="column">
+                <div flex="20" hide-sm></div>
+                <div flex="80" flex-sm="100" layout="column">
+                    <md-card>
+
+                        <ng-view></ng-view>
+
+                    </md-card>
+                </div>
+            </md-content>
+
             <md-button class="md-fab fab-action" aria-label="Add contact" href="/#/contacts/new">
                 <md-icon md-svg-src="images/icons/ic_person_add_white_24px.svg"></md-icon>
             </md-button>
         </div>
 
-    </div>
 
     @Scripts.Render("~/bundles/scripts/lib")
     @Scripts.Render("~/bundles/scripts")

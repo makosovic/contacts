@@ -1,31 +1,23 @@
 ﻿
-
-<md-content class="md-padding" layout="row" layout-wrap>
-    <div flex="10"></div>
-    <div flex="70" layout="column">
-        <md-card>
-            <md-list>
-                <md-list-item>
-                    <div layout="row" flex>
-                        <div flex="40">
-                            Name
-                        </div>
-                        <div flex>
-                            Favorite
-                        </div>
-                    </div>
-                </md-list-item>
-                <md-list-item ng-repeat="contact in contacts" ng-click="goToContact(contact, $event)">
-                    <div layout="row" flex>
-                        <div flex="40">
-                            {{ contact.firstName }} {{ contact.lastName }}
-                        </div>
-                        <div flex>
-                            <md-icon md-svg-icon="images/icons/ic_star_yellow_24px.svg" aria-label="Favorite contact" ng-if="contact.favorite"></md-icon>
-                        </div>
-                    </div>
-                </md-list-item>
-            </md-list>
-        </md-card>
-    </div>
-</md-content>
+<md-list>
+    <md-list-item>
+        <div layout="row" flex>
+            <div flex="40">
+                <strong>Name</strong>
+            </div>
+            <div flex>
+                <strong>Favorite</strong>
+            </div>
+        </div>
+    </md-list-item>
+    <md-list-item ng-repeat="contact in contacts" ng-click="goToContact(contact, $event)">
+        <div layout="row" flex>
+            <div flex="40">
+                {{ contact.firstName }} {{ contact.lastName }}
+            </div>
+            <div flex>
+                <md-icon md-svg-icon="images/icons/ic_star_yellow_24px.svg" aria-label="Favorite contact" ng-if="contact.favorite"></md-icon>
+            </div>
+        </div>
+    </md-list-item>
+</md-list>

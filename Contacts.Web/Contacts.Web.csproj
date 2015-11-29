@@ -191,6 +191,7 @@
     <Content Include="images\icons\ic_person_add_white_24px.svg" />
     <Content Include="images\icons\ic_star_yellow_24px.svg" />
     <Content Include="images\icons\ic_star_border_yellow_24px.svg" />
+    <Content Include="Scripts\contacts\notificationService.js" />
     <Content Include="Scripts\contacts\contactService.js" />
     <Content Include="Scripts\contacts\search.html" />
     <Content Include="Scripts\contacts\searchController.js" />

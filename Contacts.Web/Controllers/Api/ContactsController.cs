@@ -61,6 +61,8 @@ namespace Contacts.Web.Controllers.Api
                 return NotFound();
             }
 
+            _dbContext.Entry(contact).Collection("Tags").Load();
+
             return Ok(Mapper.Map<ContactEditModel>(contact));
         }
 

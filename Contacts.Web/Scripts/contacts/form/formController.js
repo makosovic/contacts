@@ -4,11 +4,11 @@
     angular
          .module('capp')
          .controller('contactFormController', [
-            'contactService', '$scope', '$location', '$mdToast', '$mdDialog', '$window', '$routeParams',
+            'contactService', '$scope', '$location', '$mdToast', '$mdDialog', '$window', '$routeParams', 'notificationService',
             contactFormController
          ]);
 
-    function contactFormController(contactService, $scope, $location, $mdToast, $mdDialog, $window, $routeParams) {
+    function contactFormController(contactService, $scope, $location, $mdToast, $mdDialog, $window, $routeParams, notificationService) {
         $scope.contact = {};
 
         if ($routeParams.id != "new") {
@@ -16,7 +16,7 @@
                 $scope.contact = data;
                 $scope.contact.birthdate = moment($scope.contact.birthdate).toDate();
             }, function (errors) {
-                showSimpleToast('There was an error, couldn\'t fetch contact.');
+                notificationService.show('There was an error, couldn\'t fetch contact.');
             });
         }
 
@@ -25,12 +25,12 @@
                 var contact = $scope.contact;
                 contact.birthdate = moment(contact.birthdate).format().split('+')[0];
                 (contact.id ? contactService.edit(contact, contact.id) : contactService.save(contact)).then(function (data, errors) {
-                    showSimpleToast('You have successfully saved the changes.');
+                    notificationService.show('You have successfully saved the changes.');
                 }), function (errors) {
-                    showSimpleToast('There was an error while saving changes.');
+                    notificationService.show('There was an error while saving changes.');
                 }
             } else {
-                showSimpleToast('Please enter all the required data and in valid format.');
+                notificationService.show('Please enter all the required data and in valid format.');
             }
         }
 
@@ -48,23 +48,14 @@
                 .cancel('Cancel')
                 .targetEvent(e);
             $mdDialog.show(confirm).then(function () {
-                contactService.delete(contact.id).then(function (data, errors) {
-                    showSimpleToast('Successfully deleted contact.');
-                    getContacts();
+                contactService.remove(contact.id).then(function (data, errors) {
+                    notificationService.show('Successfully deleted contact.');
+                    $location.path('/');
                 }, function (errors) {
-                    showSimpleToast('There was an error, couldn\'t delete contact.');
+                    notificationService.show('There was an error, couldn\'t delete contact.');
                 });
             });
         }
-
-        var showSimpleToast = function (message) {
-            $mdToast.show(
-              $mdToast.simple()
-                .content(message)
-                .position('top right')
-                .hideDelay(5000)
-            );
-        };
 
     }
 

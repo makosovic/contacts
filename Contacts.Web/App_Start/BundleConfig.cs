@@ -23,6 +23,7 @@ namespace Contacts.Web
                 "~/Scripts/contacts/themeConfig.js",
                 "~/Scripts/contacts/routeConfig.js",
                 "~/Scripts/contacts/contactService.js",
+                "~/Scripts/contacts/notificationService.js",
                 "~/Scripts/contacts/searchController.js",
                 "~/Scripts/contacts/form/formController.js",
                 "~/Scripts/contacts/list/listController.js"
