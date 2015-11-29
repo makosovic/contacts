@@ -19,9 +19,8 @@
             <div layout layout-sm="column">
                 <md-input-container flex>
                     <label for="lastname">Last Name</label>
-                    <input ng-model="contact.lastName" name="lastname" id="lastname" required="" maxlength="128">
+                    <input ng-model="contact.lastName" name="lastname" id="lastname" maxlength="128">
                     <div ng-messages="contactForm.lastname.$error" ng-if="contactForm.lastname.$dirty && contactForm.lastname.$touched">
-                        <div ng-message="required">Last name is required.</div>
                         <div ng-message="maxlength">Last name can't be longer than 128 characters.</div>
                     </div>
                 </md-input-container>
@@ -30,9 +29,8 @@
             <div layout layout-sm="column">
                 <md-input-container flex>
                     <label for="address">Address</label>
-                    <input ng-model="contact.address" name="address" id="address" required="" maxlength="256">
+                    <input ng-model="contact.address" name="address" id="address" maxlength="256">
                     <div ng-messages="contactForm.address.$error" ng-if="contactForm.address.$dirty && contactForm.address.$touched">
-                        <div ng-message="required">Address is required.</div>
                         <div ng-message="maxlength">Address can't be longer than 256 characters.</div>
                     </div>
                 </md-input-container>

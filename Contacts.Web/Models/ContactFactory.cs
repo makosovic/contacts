@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using Contacts.Web.Entities;
 using Contacts.Web.Models.Contact;
 
@@ -31,8 +31,10 @@ namespace Contacts.Web.Models
             };
         }
 
-        public Entities.Contact Update(ContactEditModel model, Entities.Contact entity)
+        public Entities.Contact Update(ContactEditModel model, Entities.Contact entity, IContactsDbContext dbContext)
         {
+            dbContext.Entry(entity).State = EntityState.Modified;
+
             entity.FirstName = model.FirstName;
             entity.LastName = model.LastName;
             entity.Address = model.Address;
@@ -46,8 +48,10 @@ namespace Contacts.Web.Models
                 List<Entities.ContactInfo> contactInfos = entity.ContactInfos.ToList();
                 if (contactInfos.Count > 0)
                 {
-                    contactInfos.RemoveAll(x => model.ContactInfos.All(y => y.IsDeleted));
-                    entity.ContactInfos = contactInfos;
+                    foreach (var contactInfo in contactInfos.Where(x => model.ContactInfos.All(y => y.IsDeleted)))
+                    {
+                        dbContext.Entry(contactInfo).State = EntityState.Deleted;
+                    }
                 }
 
                 foreach (var contactInfo in model.ContactInfos.Where(x => x.IsDeleted))
@@ -60,6 +64,7 @@ namespace Contacts.Web.Models
                             Type = (ContactInfoType)Enum.Parse(typeof(ContactInfoType), contactInfo.Type, true),
                             Value = contactInfo.Value
                         });
+                        dbContext.Entry(contactInfo).State = EntityState.Added;
                     }
                     else if (contactInfo.IsModified)
                     {
@@ -70,6 +75,7 @@ namespace Contacts.Web.Models
                             oldContactInfo.Type = (ContactInfoType)Enum.Parse(typeof(ContactInfoType), contactInfo.Type, true);
                             oldContactInfo.Value = contactInfo.Value;
                         }
+                        dbContext.Entry(oldContactInfo).State = EntityState.Modified;
                     }
                 }
             }
@@ -83,13 +89,17 @@ namespace Contacts.Web.Models
                 List<Entities.Tag> tags = entity.Tags.ToList();
                 if (tags.Count > 0)
                 {
-                    tags.RemoveAll(x => model.Tags.All(y => y != x.Name));
-                    entity.Tags = tags;
+                    foreach (var tag in tags.Where(x => model.Tags.All(y => y != x.Name)))
+                    {
+                        dbContext.Entry(tag).State = EntityState.Deleted;
+                    }
                 }
 
                 foreach (var tag in model.Tags.Where(x => entity.Tags.All(y => y.Name != x)))
                 {
-                    entity.Tags.Add(new Tag { Name = tag });
+                    var newTag = new Tag {Name = tag};
+                    entity.Tags.Add(newTag);
+                    dbContext.Entry(newTag).State = EntityState.Added;
                 }
             }
 

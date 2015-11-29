@@ -56,12 +56,13 @@ namespace Contacts.Web.Controllers.Api
             var contact = await _dbContext.Contacts
                 .FindAsync(id);
 
+            _dbContext.Entry(contact).Collection("Tags").Load();
+
             if (contact == null)
             {
                 return NotFound();
             }
 
-            _dbContext.Entry(contact).Collection("Tags").Load();
 
             return Ok(Mapper.Map<ContactEditModel>(contact));
         }
@@ -98,15 +99,17 @@ namespace Contacts.Web.Controllers.Api
 
             Contact contact = await _dbContext.Contacts.FindAsync(model.Id);
 
+            _dbContext.Entry(contact).Collection("Tags").Load();
+            _dbContext.Entry(contact).Collection("ContactInfos").Load();
+
             if (contact == null)
             {
                 return NotFound();
             }
 
             ContactFactory factory = new ContactFactory();
-            contact = factory.Update(model, contact);
+            contact = factory.Update(model, contact, _dbContext);
 
-            _dbContext.Entry(contact).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
