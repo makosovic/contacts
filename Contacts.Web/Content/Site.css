@@ -35,3 +35,7 @@ md-card {
     text-align: center;
     max-width: 160px;
 }
+
+md-chips {
+    padding-bottom: 26px;
+}

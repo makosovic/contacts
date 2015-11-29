@@ -17,7 +17,7 @@
         if ($routeParams.id != "new") {
             contactService.getById($routeParams.id).then(function (data, errors) {
                 $scope.contact = data;
-                $scope.contact.birthdate = moment($scope.contact.birthdate).toDate();
+                $scope.contact.birthDate = moment($scope.contact.birthDate).toDate();
             }, function (errors) {
                 notificationService.show('There was an error, couldn\'t fetch contact.');
             });
@@ -26,7 +26,9 @@
         $scope.save = function () {
             if ($scope.contactForm.$valid) {
                 var contact = $scope.contact;
-                contact.birthdate = moment(contact.birthdate).format().split('+')[0];
+                var tmp = contact.birthDate;
+                var tmp2 = moment(contact.birthDate);
+                contact.birthDate = moment(contact.birthDate).format().split('T')[0];
                 (contact.id ? contactService.edit(contact, contact.id) : contactService.save(contact)).then(function (data, errors) {
                     notificationService.show('You have successfully saved the changes.');
                 }), function (errors) {
