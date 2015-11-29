@@ -56,13 +56,13 @@ namespace Contacts.Web.Controllers.Api
             var contact = await _dbContext.Contacts
                 .FindAsync(id);
 
-            _dbContext.Entry(contact).Collection("Tags").Load();
-            _dbContext.Entry(contact).Collection("ContactInfos").Load();
-
             if (contact == null)
             {
                 return NotFound();
             }
+
+            _dbContext.Entry(contact).Collection("Tags").Load();
+            _dbContext.Entry(contact).Collection("ContactInfos").Load();
 
             return Ok(Mapper.Map<ContactEditModel>(contact));
         }
@@ -99,13 +99,13 @@ namespace Contacts.Web.Controllers.Api
 
             Contact contact = await _dbContext.Contacts.FindAsync(model.Id);
 
-            _dbContext.Entry(contact).Collection("Tags").Load();
-            _dbContext.Entry(contact).Collection("ContactInfos").Load();
-
             if (contact == null)
             {
                 return NotFound();
             }
+
+            _dbContext.Entry(contact).Collection("Tags").Load();
+            _dbContext.Entry(contact).Collection("ContactInfos").Load();
 
             ContactFactory factory = new ContactFactory();
             contact = factory.Update(model, contact, _dbContext);
@@ -123,6 +123,8 @@ namespace Contacts.Web.Controllers.Api
             {
                 return NotFound();
             }
+
+            _dbContext.Entry(contact).Collection("Tags").Load();
 
             _dbContext.Contacts.Remove(contact);
             await _dbContext.SaveChangesAsync();

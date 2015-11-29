@@ -48,7 +48,7 @@ namespace Contacts.Web.Models
                 List<Entities.ContactInfo> contactInfos = entity.ContactInfos.ToList();
                 if (contactInfos.Count > 0)
                 {
-                    foreach (var contactInfo in contactInfos.Where(x => model.ContactInfos.All(y => y.IsDeleted)))
+                    foreach (var contactInfo in contactInfos.Where(x => model.ContactInfos.Any(y => y.IsDeleted && y.Id == x.Id)))
                     {
                         dbContext.Entry(contactInfo).State = EntityState.Deleted;
                     }

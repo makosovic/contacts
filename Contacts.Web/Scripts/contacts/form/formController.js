@@ -37,9 +37,7 @@
                 }
                 (contact.id ? contactService.edit(contact, contact.id) : contactService.save(contact)).then(function (data, errors) {
                     notificationService.show('You have successfully saved the changes.');
-                    if (!contact.id) {
-                        $location.path('/contacts/' + data.id)
-                    }
+                    $location.path('/');
                 }), function (errors) {
                     notificationService.show('There was an error while saving changes.');
                 }
@@ -82,8 +80,10 @@
 
                 if (name == 'phone') {
                     $scope.phone = { isDeleted: false };
+                    $scope.showAddPhone = false;
                 } else if (name == 'email') {
                     $scope.email = { isDeleted: false };
+                    $scope.showAddEmail = false;
                 }
             } else {
                 notificationService.show('Please enter value and type for the contact info.');

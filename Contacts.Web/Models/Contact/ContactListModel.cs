@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Contacts.Web.Models.Contact
         public string LastName { get; set; }
         public string FullName { get; set; }
         public ICollection<string> Tags { get; set; }
-        public string TagsConcated { get { return Tags.Aggregate((a, b) => string.Format("{0}, {1}", a, b)); } }
+        public string TagsConcated => string.Join(", ", Tags);
         public bool Favorite { get; set; }
     }
 }

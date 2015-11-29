@@ -49,19 +49,6 @@ namespace Contacts.Web.Tests
         }
 
         [TestMethod]
-        public void ReturnOneResultIfParameterIdWasGivenAndFound()
-        {
-            var id = 1;
-            var contactsController = new ContactsController(_mockDbContext.Object);
-
-            var result = contactsController.Get(id).Result;
-
-            var okResult = result as OkNegotiatedContentResult<ContactListModel>;
-            Assert.IsNotNull(okResult);
-            Assert.AreEqual(1, okResult.Content.Id);
-        }
-
-        [TestMethod]
         public void ReturnNotFoundIfParameterIdWasGivenButNotFound()
         {
             var id = 0;

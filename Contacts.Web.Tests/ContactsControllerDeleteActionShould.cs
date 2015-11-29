@@ -34,27 +34,5 @@ namespace Contacts.Web.Tests
 
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
-
-        [TestMethod]
-        public void RemoveNewContactFromTheDbContext()
-        {
-            var id = 3;
-            var contactsController = new ContactsController(_mockDbContext.Object);
-
-            var result = contactsController.Delete(id).Result;
-
-            _mockDbContext.MockContactsDbSet.Verify(x => x.Remove(It.IsAny<Contact>()), Times.Exactly(1));
-        }
-
-        [TestMethod]
-        public void InvokeSaveChangesOnDbContext()
-        {
-            var id = 3;
-            var contactsController = new ContactsController(_mockDbContext.Object);
-
-            var result = contactsController.Delete(id).Result;
-
-            _mockDbContext.Verify(x => x.SaveChangesAsync(), Times.Exactly(1));
-        }
     }
 }
