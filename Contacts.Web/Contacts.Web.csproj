@@ -186,8 +186,9 @@
     <Compile Include="Models\Contact\ContactEditModel.cs" />
     <Compile Include="Models\Contact\ContactListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="images\icons\ic_add_gray_24px.svg" />
     <Content Include="images\icons\ic_contacts_black_24px.svg" />
-    <Content Include="images\icons\ic_delete_black_24px.svg" />
+    <Content Include="images\icons\ic_delete_gray_24px.svg" />
     <Content Include="images\icons\ic_person_add_white_24px.svg" />
     <Content Include="images\icons\ic_star_yellow_24px.svg" />
     <Content Include="images\icons\ic_star_border_yellow_24px.svg" />

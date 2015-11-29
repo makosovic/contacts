@@ -37,13 +37,103 @@
                 </md-input-container>
             </div>
 
-            <div layout="row" layout-sm="column">
+            <div layout="row" layout-sm="column" style="padding-bottom: 26px">
                 <md-checkbox ng-model="contact.favorite" aria-label="Favorite">
                     Favorite
                 </md-checkbox>
 
                 <md-datepicker ng-model="contact.birthDate" md-placeholder="Birthday" name="birthdate" id="birthdate"></md-datepicker>
             </div>
+
+            <div ng-repeat="item in contact.contactInfos | filter:{name:'phone',isDeleted:false}">
+                <div layout layout-sm="column">
+                    <md-input-container>
+                        <label>Phone</label>
+                        <input ng-model="item.value">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Type</label>
+                        <md-select ng-model="item.type">
+                            <md-option ng-repeat="type in contactInfoTypes" value="{{type}}">
+                                {{type}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-button ng-click="deleteContactInfo(item, $event)"
+                               title="Delete contact info"
+                               aria-label="Delete contact info"
+                               class="md-icon-button launch">
+                        <md-icon md-svg-icon="Images/icons/ic_delete_gray_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+
+            <div layout layout-sm="column">
+                <md-input-container>
+                    <label>Phone</label>
+                    <input ng-model="phone.value">
+                </md-input-container>
+                <md-input-container>
+                    <label>Type</label>
+                    <md-select ng-model="phone.type">
+                        <md-option ng-repeat="type in contactInfoTypes" value="{{type}}">
+                            {{type}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button ng-click="addContactInfo(phone, 'phone', $event)"
+                           title="Add phone"
+                           aria-label="Add phone"
+                           class="md-icon-button launch">
+                    <md-icon md-svg-icon="Images/icons/ic_add_gray_24px.svg"></md-icon>
+                </md-button>
+            </div>
+
+
+            <div ng-repeat="item in contact.contactInfos | filter:{name:'email',isDeleted:false}">
+                <div layout layout-sm="column">
+                    <md-input-container>
+                        <label>Email</label>
+                        <input ng-model="item.value">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Type</label>
+                        <md-select ng-model="item.type">
+                            <md-option ng-repeat="type in contactInfoTypes" value="{{type}}">
+                                {{type}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-button ng-click="deleteContactInfo(item, $event)"
+                               title="Delete contact info"
+                               aria-label="Delete contact info"
+                               class="md-icon-button launch">
+                        <md-icon md-svg-icon="Images/icons/ic_delete_gray_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+
+            <div layout layout-sm="column">
+                <md-input-container>
+                    <label>Email</label>
+                    <input ng-model="email.value">
+                </md-input-container>
+                <md-input-container>
+                    <label>Type</label>
+                    <md-select ng-model="email.type">
+                        <md-option ng-repeat="type in contactInfoTypes" value="{{type}}">
+                            {{type}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button ng-click="addContactInfo(email, 'email', $event)"
+                           title="Add email"
+                           aria-label="Add email"
+                           class="md-icon-button launch">
+                    <md-icon md-svg-icon="Images/icons/ic_add_gray_24px.svg"></md-icon>
+                </md-button>
+            </div>
+
 
             <section layout="row" layout-sm="column" layout-align="center center">
                 <span flex></span>

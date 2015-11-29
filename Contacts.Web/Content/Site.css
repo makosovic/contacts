@@ -11,10 +11,10 @@
     }
 
 
-.autocomplete-custom-template .item-title md-icon {
-    height: 18px;
-    width: 18px;
-}
+.autocomplete-custom-template .item-title, 
+.autocomplete-custom-template .item-metadata {
+  display: block;
+  line-height: 2; }
 
 .md-pane-open .md-datepicker-calendar {
     background: white;

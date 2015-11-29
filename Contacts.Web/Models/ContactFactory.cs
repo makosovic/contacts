@@ -54,19 +54,20 @@ namespace Contacts.Web.Models
                     }
                 }
 
-                foreach (var contactInfo in model.ContactInfos.Where(x => x.IsDeleted))
+                foreach (var contactInfo in model.ContactInfos.Where(x => !x.IsDeleted))
                 {
                     if (contactInfo.IsNew)
                     {
-                        entity.ContactInfos.Add(new Entities.ContactInfo
+                        var newContactInfo = new Entities.ContactInfo
                         {
                             Name = contactInfo.Name,
                             Type = (ContactInfoType)Enum.Parse(typeof(ContactInfoType), contactInfo.Type, true),
                             Value = contactInfo.Value
-                        });
-                        dbContext.Entry(contactInfo).State = EntityState.Added;
+                        };
+                        entity.ContactInfos.Add(newContactInfo);
+                        dbContext.Entry(newContactInfo).State = EntityState.Added;
                     }
-                    else if (contactInfo.IsModified)
+                    else
                     {
                         var oldContactInfo = entity.ContactInfos.FirstOrDefault(x => x.Id == contactInfo.Id);
                         if (oldContactInfo != null)

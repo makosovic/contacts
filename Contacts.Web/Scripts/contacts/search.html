@@ -15,12 +15,8 @@
                     <span> {{item.firstName}} {{item.lastName}}</span>
                 </span>
                 <span class="item-metadata">
-                    <span class="item-metastat">
-                        <strong>{{item.phone}}</strong>
-                    </span>
-                    <span class="item-metastat">
-                        <strong>{{item.email}}</strong>
-                    </span>
+                    <strong>Tags: </strong>
+                    {{item.tagsConcated}}
                 </span>
             </md-item-template>
         </md-autocomplete>

@@ -21,7 +21,6 @@ namespace Contacts.Web.Models.ContactInfo
 
         public bool IsNew => Id == 0;
         public bool IsDeleted { get; set; }
-        public bool IsModified { get; set; }
     }
 }
 

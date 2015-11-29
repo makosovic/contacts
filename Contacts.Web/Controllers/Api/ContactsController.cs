@@ -57,12 +57,12 @@ namespace Contacts.Web.Controllers.Api
                 .FindAsync(id);
 
             _dbContext.Entry(contact).Collection("Tags").Load();
+            _dbContext.Entry(contact).Collection("ContactInfos").Load();
 
             if (contact == null)
             {
                 return NotFound();
             }
-
 
             return Ok(Mapper.Map<ContactEditModel>(contact));
         }
@@ -81,7 +81,7 @@ namespace Contacts.Web.Controllers.Api
             _dbContext.Contacts.Add(contact);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = contact.Id }, Mapper.Map<ContactEditModel>(contact));
+            return CreatedAtRoute("Default", new { id = contact.Id }, Mapper.Map<ContactEditModel>(contact));
         }
 
         [Route("api/contacts/{id}")]

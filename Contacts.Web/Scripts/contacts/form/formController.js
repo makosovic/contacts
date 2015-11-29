@@ -9,6 +9,10 @@
          ]);
 
     function contactFormController(contactService, $scope, $location, $mdToast, $mdDialog, $window, $routeParams, notificationService) {
+        $scope.contactInfoTypes = ["home", "work", "mobile", "other"];
+        $scope.email = { isDeleted: false };
+        $scope.phone = { isDeleted: false };
+
         $scope.contact = {
             tags: [],
             contactInfos: []
@@ -17,7 +21,9 @@
         if ($routeParams.id != "new") {
             contactService.getById($routeParams.id).then(function (data, errors) {
                 $scope.contact = data;
-                $scope.contact.birthDate = moment($scope.contact.birthDate).toDate();
+                if ($scope.contact.birthDate) {
+                    $scope.contact.birthDate = moment($scope.contact.birthDate).toDate();
+                }
             }, function (errors) {
                 notificationService.show('There was an error, couldn\'t fetch contact.');
             });
@@ -26,11 +32,14 @@
         $scope.save = function () {
             if ($scope.contactForm.$valid) {
                 var contact = $scope.contact;
-                var tmp = contact.birthDate;
-                var tmp2 = moment(contact.birthDate);
-                contact.birthDate = moment(contact.birthDate).format().split('T')[0];
+                if (contact.birthDate) {
+                    contact.birthDate = moment(contact.birthDate).format().split('T')[0];
+                }
                 (contact.id ? contactService.edit(contact, contact.id) : contactService.save(contact)).then(function (data, errors) {
                     notificationService.show('You have successfully saved the changes.');
+                    if (!contact.id) {
+                        $location.path('/contacts/' + data.id)
+                    }
                 }), function (errors) {
                     notificationService.show('There was an error while saving changes.');
                 }
@@ -60,6 +69,25 @@
                     notificationService.show('There was an error, couldn\'t delete contact.');
                 });
             });
+        }
+
+        $scope.deleteContactInfo = function (contactInfo, e) {
+            contactInfo.isDeleted = true;
+        }
+
+        $scope.addContactInfo = function (contactInfo, name, e) {
+            if (contactInfo.value && contactInfo.type) {
+                contactInfo.name = name;
+                $scope.contact.contactInfos.push(contactInfo);
+
+                if (name == 'phone') {
+                    $scope.phone = { isDeleted: false };
+                } else if (name == 'email') {
+                    $scope.email = { isDeleted: false };
+                }
+            } else {
+                notificationService.show('Please enter value and type for the contact info.');
+            }
         }
 
     }

@@ -11,7 +11,9 @@ namespace Contacts.Web
         {
             AutoMapper.Mapper.CreateMap<Contact, ContactListModel>()
                 .ForMember(dest => dest.FullName,
-                           opts => opts.MapFrom(src => src.FirstName + " " + src.LastName));
+                           opts => opts.MapFrom(src => src.FirstName + " " + src.LastName))
+                .ForMember(dest => dest.Tags,
+                           opts => opts.MapFrom(src => src.Tags.Select(x => x.Name)));
 
             AutoMapper.Mapper.CreateMap<Contact, ContactEditModel>()
                 .ForMember(dest => dest.Tags,
@@ -19,7 +21,7 @@ namespace Contacts.Web
 
             AutoMapper.Mapper.CreateMap<ContactInfo, ContactInfoEditModel>()
                 .ForMember(dest => dest.Type,
-                           opts => opts.MapFrom(src => src.Type.ToString()));
+                           opts => opts.MapFrom(src => src.Type.ToString().ToLower()));
         }
     }
 }
