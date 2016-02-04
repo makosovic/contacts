@@ -29,5 +29,3 @@ Perzistentni storage očekuje SqlServer named instance, te da korisnik ima prava
     <add name="ContactsDbConnectionString" connectionString="Data Source=.;Initial Catalog=ContactsDb;Integrated Security=True;MultipleActiveResultSets=True" providerName="System.Data.SqlClient" />
   </connectionStrings>
 ```
-
-Aplikacija se također može isprobati [ovdje](http://contactshr.azurewebsites.net)
